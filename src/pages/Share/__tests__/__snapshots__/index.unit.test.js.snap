@@ -1,0 +1,40 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`ShareModule matches snapshot 1`] = `
+<div>
+  <div>
+    <span>
+      Welcome 
+      <b>
+        test@email.com
+      </b>
+    </span>
+    <button>
+      Share a movie
+    </button>
+    <button>
+      Logout
+    </button>
+  </div>
+  <form
+    autocomplete="off"
+    novalidate=""
+  >
+    <label
+      for="url"
+    >
+      Youtube URL:
+      <input
+        id="url"
+        name="url"
+        value=""
+      />
+    </label>
+    <button
+      type="submit"
+    >
+      Share
+    </button>
+  </form>
+</div>
+`;
