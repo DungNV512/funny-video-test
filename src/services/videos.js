@@ -1,9 +1,8 @@
 import axios from 'axios';
-
-const API_URL = 'https://my-json-server.typicode.com/DungNV512/demo-API/';
+import { ENDPOINT_URL } from "../constants";
 
 const getPublicContent = () => {
-  return axios.get(API_URL + 'videos');
+  return axios.get(ENDPOINT_URL + "videos");
 };
 
 const shareVideo = () => {};

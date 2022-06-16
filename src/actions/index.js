@@ -1,15 +1,18 @@
+// import { Promise, resolve } from "bluebird";
 import {
   LOGIN_SUCCESS,
   LOGIN_FAILURE,
   LOGOUT,
   GET_LIST_VIDEOS_SUCCESS,
   GET_LIST_VIDEOS_FAILURE,
+  REGISTER_SUCCESS,
+  REGISTER_FAILURE,
 } from "./types";
 
 import AuthService from "../services/auth";
 import videoService from "../services/videos";
 import userService from "../services/user";
-import { getTokenFromLocal } from "../helper";
+import { getTokenFromLocal, checkStatusCode } from "../helper";
 
 export const silentLogin = () => (dispatch) => {
   const userInfo = getTokenFromLocal();
@@ -28,10 +31,43 @@ export const silentLogin = () => (dispatch) => {
   }
 };
 
+export const register =
+  ({ email, password }) =>
+  (dispatch) => {
+    return AuthService.register({ email, password }).then(
+      (res) => {
+        localStorage.setItem("user", JSON.stringify(res.data));
+        const user = {
+          id: res.data.id,
+          email: res.data.email,
+          password: res.data.password,
+          access_token: res.data.access_token,
+        };
+        dispatch({
+          type: REGISTER_SUCCESS,
+          payload: {
+            user,
+            message: res.statusText,
+          },
+        });
+
+        return Promise.resolve(user);
+      },
+      (error) => {
+        dispatch({
+          type: REGISTER_FAILURE,
+          payload: { message: error.message },
+        });
+
+        return Promise.reject();
+      }
+    );
+  };
+
 export const login =
   ({ email, password }) =>
   (dispatch) => {
-    return AuthService.login(email, password).then(
+    return AuthService.login(email, password, dispatch).then(
       (data) => {
         dispatch({
           type: LOGIN_SUCCESS,
@@ -77,26 +113,15 @@ export const getListVideos = () => (dispatch) => {
   );
 };
 
-export const checkAuth = ({ email, password }, user) => {
-  return userService.getPublicContent().then(
+export const checkAuth = (currentUser) => {
+  return userService.getUsers().then(
     (res) => {
-      if (email === res.data.email && password === res.data.password) {
-        return Promise.resolve({
-          code: 200,
-          message: "Login successfully!",
-          isAuth: true,
-          user: { ...user.data, access_token: "1234" }, // should have access_token_expires_at and refresh_token
-        });
-      }
-      return Promise.resolve({
-        code: 401,
-        isAuth: false,
-        message: "Login failure!",
-      });
+      const status = checkStatusCode(currentUser, res.data);
+      return status;
     },
     (error) => {
       console.log(error);
-      return false;
+      return false();
     }
   );
 };

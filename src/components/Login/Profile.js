@@ -15,6 +15,7 @@ const Profile = () => {
 
   const onLogout = () => {
     dispatch(logout());
+    history.push("/");
   };
 
   return (

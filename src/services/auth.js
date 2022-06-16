@@ -1,30 +1,47 @@
 import axios from "axios";
-import { API_URL } from "../constants";
-import { checkAuth } from "../actions";
+import { ENDPOINT_URL } from "../constants";
+import { generateUniqueId } from "../helper";
+import { checkAuth, register as actionRegister } from "../actions";
 
-const login = (email, password) => {
-  return axios
-    .post(API_URL + "user", {
-      email,
-      password,
-    })
-    .then((user) => checkAuth({ email, password }, user)) // mimic checkAuth function, should be execute on back-end side
-    .then((response) => {
-      const { isAuth, user, message } = response;
-      if (isAuth) {
+const login = (email, password, dispatch) => {
+  // mimic checkAuth function, should be execute on back-end side
+  return checkAuth({ email, password }).then((response) => {
+    const { user, message, statusCode } = response;
+    switch (statusCode) {
+      case 200:
         localStorage.setItem("user", JSON.stringify(user));
         return Promise.resolve({
           user,
-          isAuth,
+          isAuth: true,
           message,
         });
-      } else {
+      case 201:
+        return dispatch(actionRegister({ email, password })).then((rs) => {
+          return Promise.resolve({
+            user: rs,
+            isAuth: true,
+            message,
+          });
+        });
+      case 400:
+      case 401:
         return Promise.reject({
-          isAuth,
+          isAuth: false,
           message,
         });
-      }
-    });
+      default:
+        break;
+    }
+  });
+};
+
+const register = ({ email, password }) => {
+  return axios.post(ENDPOINT_URL + "user", {
+    id: generateUniqueId().smallId,
+    access_token: generateUniqueId().uniqueId,
+    email,
+    password,
+  });
 };
 
 const logout = () => {
@@ -34,4 +51,5 @@ const logout = () => {
 export default {
   login,
   logout,
+  register,
 };

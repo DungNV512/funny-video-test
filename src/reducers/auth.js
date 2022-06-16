@@ -1,4 +1,10 @@
-import { LOGIN_SUCCESS, LOGIN_FAILURE, LOGOUT } from "../actions/types";
+import {
+  LOGIN_SUCCESS,
+  LOGIN_FAILURE,
+  LOGOUT,
+  REGISTER_SUCCESS,
+  REGISTER_FAILURE,
+} from "../actions/types";
 
 const initialState = {
   isAuth: false,
@@ -9,6 +15,19 @@ const initialState = {
 export default (state = initialState, action) => {
   const { type, payload } = action;
   switch (type) {
+    case REGISTER_SUCCESS:
+      // auto login if register successful
+      return {
+        ...state,
+        isAuth: true,
+        user: payload.user,
+      };
+    case REGISTER_FAILURE:
+      return {
+        ...state,
+        isAuth: false,
+        user: null,
+      };
     case LOGIN_SUCCESS:
       return {
         ...state,

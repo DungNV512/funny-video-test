@@ -1,25 +1,27 @@
-import React, { useCallback, useState } from 'react';
-import { useDispatch } from 'react-redux';
-import { validateRequired } from '../../helper';
-import { login } from '../../actions';
+import React, { useCallback, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { selectIsAuth } from "../../selector/auth/selectAuth";
+import { validateRequired } from "../../helper";
+import { login, register } from "../../actions";
 
 const LoginForm = () => {
   const dispatch = useDispatch();
+  const isAuth = useSelector(selectIsAuth);
   const [isLoading, setIsLoading] = useState(false);
   const [form, setForm] = useState({
-    email: '',
-    password: '',
+    email: "",
+    password: "",
   });
   const [error, setError] = useState({
-    email: '',
-    password: '',
+    email: "",
+    password: "",
   });
   const validation = useCallback(() => {
     const error = {
       email: validateRequired(form.email),
       password: validateRequired(form.password),
     };
-    const isValid = Object.values(error).every((e) => e === '');
+    const isValid = Object.values(error).every((e) => e === "");
     setError(error);
     return isValid;
   }, [form]);
@@ -45,17 +47,26 @@ const LoginForm = () => {
   const handleSubmit = useCallback(
     (e) => {
       e.preventDefault();
-      setIsLoading(true)
+      setIsLoading(true);
       const isValid = validation();
       if (isValid) {
+        //if (isAuth) {
         dispatch(
           login({
             email: form.email.trim(),
             password: form.password.trim(),
           })
         );
+        // } else {
+        //   dispatch(
+        //     register({
+        //       email: form.email.trim(),
+        //       password: form.password.trim(),
+        //     })
+        //   );
+        // }
       }
-      setIsLoading(false)
+      setIsLoading(false);
     },
     [form, validation, dispatch]
   );
@@ -66,9 +77,9 @@ const LoginForm = () => {
       autoComplete="off"
       onSubmit={handleSubmit}
       style={{
-        display: 'flex',
-        justifyContent: 'space-around',
-        alignItems: 'center',
+        display: "flex",
+        justifyContent: "space-around",
+        alignItems: "center",
       }}
     >
       <div>

@@ -1,13 +1,12 @@
 import axios from "axios";
-import authHeader from "../helper";
-import { API_URL } from "../constants";
+import { ENDPOINT_URL } from "../constants";
 
-const getPublicContent = () => {
-  return axios.get(API_URL + "user");
+const getUsers = () => {
+  return axios.get(ENDPOINT_URL + "user");
 };
 
 const userService = {
-  getPublicContent,
+  getUsers,
 };
 
-export default userService
+export default userService;
