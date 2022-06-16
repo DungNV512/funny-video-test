@@ -1,7 +1,7 @@
 import React, { useCallback, useState } from "react";
 import { validateRequired } from "../../helper";
 
-const ShareForm = ({ onShare, isLoading }) => {
+const ShareForm = ({ onShare, isSucess }) => {
   const [url, setUrl] = useState({
     value: "",
     error: "",
@@ -31,21 +31,35 @@ const ShareForm = ({ onShare, isLoading }) => {
   );
 
   return (
-    <form noValidate autoComplete="off" onSubmit={handleSubmit}>
-      <label htmlFor="url">
-        Youtube URL:
-        <input
-          name="url"
-          id="url"
-          value={url.value}
-          onChange={handleChangeUrl}
-        />
-        {url.error && <span>{url.error}</span>}
-      </label>
-      <button type="submit" disabled={isLoading}>
-        {isLoading ? "Loading..." : "Share"}
-      </button>
-    </form>
+    <div
+      style={{
+        display: "flex",
+        justifyContent: "center",
+        alignItems: "center",
+        padding: "10px",
+        width: "360px",
+        minHeight: "150px",
+        position: "absolute",
+        left: "50%",
+        top: "40%",
+        transform: "translate(-50%, -50%)",
+        border: "2px solid #1c9f7f",
+      }}
+    >
+      <div className="App-form">
+        <form noValidate autoComplete="off" onSubmit={handleSubmit}>
+          <input
+            type="url"
+            name="url"
+            id="url"
+            placeholder="Youtube URL"
+            value={url.value}
+            onChange={handleChangeUrl}
+          />
+          <input type="submit" value="Share"/>
+        </form>
+      </div>
+    </div>
   );
 };
 

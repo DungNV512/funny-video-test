@@ -8,6 +8,7 @@ import Home from "./pages/Home";
 import Share from "./pages/Share";
 import history from "./history";
 import "./App.css";
+import "./styles.scss";
 
 const App = () => {
   const dispatch = useDispatch();
@@ -21,7 +22,6 @@ const App = () => {
       style={{
         margin: "0 auto",
         maxWidth: "1080px",
-        borderBottom: "1px double",
         marginBottom: "20px",
         padding: "10px 0",
       }}

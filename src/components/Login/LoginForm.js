@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { selectIsAuth } from "../../selector/auth/selectAuth";
 import { validateRequired } from "../../helper";
 import { login, register } from "../../actions";
+import "./style.css";
 
 const LoginForm = () => {
   const dispatch = useDispatch();
@@ -73,6 +74,7 @@ const LoginForm = () => {
 
   return (
     <form
+      className="profile"
       noValidate
       autoComplete="off"
       onSubmit={handleSubmit}

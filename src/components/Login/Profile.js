@@ -3,6 +3,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { useHistory } from "react-router-dom";
 import { selectUser } from "../../selector/auth/selectAuth";
 import { logout } from "../../actions";
+import "./style.css";
 
 const Profile = () => {
   const history = useHistory();
@@ -20,9 +21,10 @@ const Profile = () => {
 
   return (
     <div
+      className="profile"
       style={{
         display: "flex",
-        justifyContent: "space-around",
+        justifyContent: "flex-end",
         alignItems: "center",
         width: "460px",
       }}

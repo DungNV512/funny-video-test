@@ -32,7 +32,6 @@ const Videos = () => {
         {videos.map((video) => (
           <li key={video.id}>
             <VideoItem canVote onVote={handleVote} video={video} />
-            <hr />
           </li>
         ))}
       </ul>

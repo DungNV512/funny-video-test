@@ -1,0 +1,9 @@
+.movie-item {
+    display: "flex";
+    flex-direction: "column";
+    align-items: "flex-start";
+}
+
+.movie-item>* {
+    margin-bottom: 10px;
+}
