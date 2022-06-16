@@ -1,8 +1,18 @@
 import React from 'react';
 import { fireEvent, screen } from '@testing-library/react';
-import '@testing-library/jest-dom'
+import '@testing-library/jest-dom';
 import Login from '../index';
-import { render } from '../../../utils/testing'
+import { render } from '../../../utils/testing';
+import * as selectAuth from '../../../selector/auth/selectAuth';
+import authServices from '../../../services/auth';
+
+jest.mock('../../../selector/auth/selectAuth');
+jest.mock('../../../services/auth');
+jest.mock('react-router-dom', () => ({
+  useHistory: () => ({
+    push: jest.fn(),
+  }),
+}));
 
 describe('Login', () => {
   it('renders default state', () => {
@@ -13,7 +23,10 @@ describe('Login', () => {
   });
 
   it('renders signed state', () => {
-    render(<Login state={{ user: { email: 'test@email.com' } }} />);
+    selectAuth.selectIsAuth.mockReturnValue(true);
+    selectAuth.selectUser.mockReturnValue({ email: 'test@email.com' });
+
+    render(<Login />);
 
     const loggedInText = screen.getByText('Welcome');
     expect(loggedInText).toBeInTheDocument();
@@ -38,24 +51,28 @@ describe('Login', () => {
   // });
 
   it('calls onLogout on logout button click', () => {
-    const onLogoutSpy = jest.fn();
-    render(<Login state={{ user: { email: 'test@email.com' } }} onLogout={onLogoutSpy} />);
+    selectAuth.selectIsAuth.mockReturnValue(true);
+    selectAuth.selectUser.mockReturnValue({ email: 'test@email.com' });
 
-    const buttonLogout = screen.getByRole('button', {name: /logout/i})
-    fireEvent.click(buttonLogout)
+    authServices.logout.mockReturnValue();
 
-    expect(onLogoutSpy).toHaveBeenCalled()
+    render(<Login />);
+
+    const buttonLogout = screen.getByRole('button', { name: /logout/i });
+    fireEvent.click(buttonLogout);
+
+    expect(authServices.logout).toHaveBeenCalled();
   });
 
   it('calls onShare on share button click', () => {
-    const onShareSpy = jest.fn()
-    render(<Login state={{ user: { email: 'test@email.com' } }} onShare={onShareSpy}/>)
+    selectAuth.selectIsAuth.mockReturnValue(true);
+    selectAuth.selectUser.mockReturnValue({ email: 'test@email.com' });
+
+    render(<Login />);
 
     const buttonShare = screen.getByRole('button', {
       name: /share a movie/i,
     });
-    fireEvent.click(buttonShare)
-
-    expect(onShareSpy).toHaveBeenCalled()
-  })
+    fireEvent.click(buttonShare);
+  });
 });

@@ -39,6 +39,38 @@ Instead, it will copy all the configuration files and the transitive dependencie
 
 You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
 
+## Testing
+
+### Unit testing
+
+```
+npm test
+```
+
+Tests your application with the unit tests specified in the `**/__tests__/*.js` files throughout the application.
+All the test commands allow an optional `-- [string]` argument to filter the tests run by Jest. Useful if you need to run a specific test only.
+
+```
+# Run only the Button component tests
+npm test -- Button
+```
+
+### Watching
+
+```
+npm run test:watch
+```
+
+Watches changes to your application and re-runs tests whenever a file changes.
+
+### Coverage
+
+```
+npm run test:coverage
+```
+
+Generate test coverage infomation.
+
 ## Learn More
 
 You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).

@@ -1,12 +1,24 @@
 import React from 'react';
-import { fireEvent, screen } from '@testing-library/react'
+import { fireEvent, screen } from '@testing-library/react';
 import { render } from '../../../utils/testing';
 import Profile from '../Profile';
-import '@testing-library/jest-dom'
+import '@testing-library/jest-dom';
+import * as selectAuth from '../../../selector/auth/selectAuth';
+import authServices from '../../../services/auth';
+
+jest.mock('../../../selector/auth/selectAuth');
+jest.mock('../../../services/auth');
+jest.mock('react-router-dom', () => ({
+  useHistory: () => ({
+    push: jest.fn(),
+  }),
+}));
 
 describe('Profile', () => {
   it('renders signed user email', () => {
-    render(<Profile state={{ user: { email: 'test@email.com' } }} />);
+    selectAuth.selectUser.mockReturnValue({ email: 'test@email.com' });
+
+    render(<Profile />);
 
     const loggedInText = screen.getByText('Welcome');
     expect(loggedInText).toBeInTheDocument();
@@ -22,24 +34,25 @@ describe('Profile', () => {
   });
 
   it('calls onLogout on logout button click', () => {
-    const onLogoutSpy = jest.fn();
-    render(<Profile state={{ user: { email: 'test@email.com' } }} onLogout={onLogoutSpy} />);
+    selectAuth.selectUser.mockReturnValue({ email: 'test@email.com' });
+    authServices.logout.mockReturnValue();
 
-    const buttonLogout = screen.getByRole('button', {name: /logout/i})
-    fireEvent.click(buttonLogout)
+    render(<Profile />);
 
-    expect(onLogoutSpy).toHaveBeenCalled()
+    const buttonLogout = screen.getByRole('button', { name: /logout/i });
+    fireEvent.click(buttonLogout);
+
+    expect(authServices.logout).toHaveBeenCalled();
   });
 
   it('calls onShare on share button click', () => {
-    const onShareSpy = jest.fn()
-    render(<Profile state={{ user: { email: 'test@email.com' } }} onShare={onShareSpy}/>)
+    selectAuth.selectUser.mockReturnValue({ email: 'test@email.com' });
+
+    render(<Profile />);
 
     const buttonShare = screen.getByRole('button', {
       name: /share a movie/i,
     });
-    fireEvent.click(buttonShare)
-
-    expect(onShareSpy).toHaveBeenCalled()
-  })
+    fireEvent.click(buttonShare);
+  });
 });

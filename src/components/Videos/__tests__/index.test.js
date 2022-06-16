@@ -3,8 +3,8 @@ import { screen, waitFor, within } from '@testing-library/react';
 import Videos from '../index';
 import MOCK_SHARED_VIDEOS from '../../../mockAPI/videos.json';
 import videoServices from '../../../services/videos';
-import { render } from '../../../utils/testing'
-import '@testing-library/jest-dom'
+import { render } from '../../../utils/testing';
+import '@testing-library/jest-dom';
 
 jest.mock('../../../services/videos');
 
@@ -22,8 +22,10 @@ describe('Videos', () => {
     expect(emptyText).toBeInTheDocument();
   });
 
-  it('renders list of 3 movies', async () => {
-    videoServices.getPublicContent.mockResolvedValueOnce({ data: MOCK_SHARED_VIDEOS.data });
+  it('renders list of 3 videos', async () => {
+    videoServices.getPublicContent.mockResolvedValueOnce({
+      data: MOCK_SHARED_VIDEOS.data,
+    });
 
     render(<Videos />);
 
@@ -32,6 +34,6 @@ describe('Videos', () => {
       const { getAllByRole } = within(list);
       const items = getAllByRole('listitem');
       expect(items.length).toBe(3);
-    })
+    });
   });
 });

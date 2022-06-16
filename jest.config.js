@@ -7,7 +7,9 @@ module.exports = {
     '!src/services/*.js',
     '!src/index.js',
     '!src/reportWebVitals.js',
-    '!src/setupTests.js'
+    '!src/setupTests.js',
+    '!src/mockAPI/index.js',
+    '!src/components/PrivateRoute.js'
   ],
   coverageThreshold: {
     global: {

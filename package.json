@@ -8,7 +8,10 @@
     "@testing-library/react": "^13.3.0",
     "@testing-library/user-event": "^13.5.0",
     "axios": "^0.20.0",
+    "body-parser": "^1.19.0",
     "bootstrap": "^4.5.2",
+    "json-server": "^0.14.2",
+    "jsonwebtoken": "^8.1.0",
     "react": "^18.1.0",
     "react-dom": "^18.1.0",
     "react-player": "^2.10.1",
@@ -20,14 +23,12 @@
     "redux-thunk": "^2.3.0",
     "reselect": "^4.0.0",
     "validator": "^13.1.1",
-    "web-vitals": "^2.1.4",
-    "body-parser": "^1.19.0",
-    "json-server": "^0.14.2",
-    "jsonwebtoken": "^8.1.0"
+    "web-vitals": "^2.1.4"
   },
   "devDependencies": {
     "json-loader": "^0.5.7",
-    "redux-devtools-extension": "^2.13.8"
+    "redux-devtools-extension": "^2.13.8",
+    "redux-mock-store": "^1.5.4"
   },
   "scripts": {
     "start": "react-scripts start",
