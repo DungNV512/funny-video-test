@@ -2,36 +2,13 @@
 
 exports[`HomeModule matches snapshot 1`] = `
 <div>
-  <form
-    autocomplete="off"
-    novalidate=""
+  <div
+    class="home-page"
+    style="margin: 0px auto; max-width: 720px;"
   >
-    <div>
-      <input
-        id="email"
-        name="email"
-        placeholder="Email"
-        type="text"
-        value=""
-      />
-    </div>
-    <div>
-      <input
-        id="password"
-        name="password"
-        placeholder="Password"
-        type="password"
-        value=""
-      />
-    </div>
-    <button
-      type="submit"
-    >
-      Login/Register
-    </button>
-  </form>
-  <p>
-    Loading...
-  </p>
+    <p>
+      Empty.
+    </p>
+  </div>
 </div>
 `;

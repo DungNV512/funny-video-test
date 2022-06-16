@@ -1,25 +1,25 @@
-import React, { useCallback, useState } from "react";
-import { useDispatch } from "react-redux";
-import { validateRequired } from "../../helper";
-import { login } from "../../actions";
+import React, { useCallback, useState } from 'react';
+import { useDispatch } from 'react-redux';
+import { validateRequired } from '../../helper';
+import { login } from '../../actions';
 
 const LoginForm = () => {
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
+  const [isLoading, setIsLoading] = useState(false);
   const [form, setForm] = useState({
-    email: "",
-    password: "",
+    email: '',
+    password: '',
   });
   const [error, setError] = useState({
-    email: "",
-    password: "",
+    email: '',
+    password: '',
   });
-
   const validation = useCallback(() => {
     const error = {
       email: validateRequired(form.email),
       password: validateRequired(form.password),
     };
-    const isValid = Object.values(error).every((e) => e === "");
+    const isValid = Object.values(error).every((e) => e === '');
     setError(error);
     return isValid;
   }, [form]);
@@ -45,17 +45,19 @@ const LoginForm = () => {
   const handleSubmit = useCallback(
     (e) => {
       e.preventDefault();
+      setIsLoading(true)
       const isValid = validation();
       if (isValid) {
         dispatch(
           login({
-            email: e.target.email.value.trim(),
-            password: e.target.password.value.trim(),
+            email: form.email.trim(),
+            password: form.password.trim(),
           })
         );
       }
+      setIsLoading(false)
     },
-    [form, validation]
+    [form, validation, dispatch]
   );
 
   return (
@@ -64,9 +66,9 @@ const LoginForm = () => {
       autoComplete="off"
       onSubmit={handleSubmit}
       style={{
-        display: "flex",
-        justifyContent: "space-around",
-        alignItems: "center",
+        display: 'flex',
+        justifyContent: 'space-around',
+        alignItems: 'center',
       }}
     >
       <div>
@@ -91,8 +93,8 @@ const LoginForm = () => {
         />
         {error.password && <span>{error.password}</span>}
       </div>
-      <button type="submit">
-        {"Login/Register"}
+      <button type="submit" disabled={isLoading}>
+        Login/Register
       </button>
     </form>
   );

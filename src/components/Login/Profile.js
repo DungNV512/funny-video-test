@@ -1,6 +1,6 @@
 import React from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { useHistory, Link } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 import { selectUser } from "../../selector/auth/selectAuth";
 import { logout } from "../../actions";
 

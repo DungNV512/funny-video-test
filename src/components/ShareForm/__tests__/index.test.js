@@ -1,6 +1,7 @@
-import { fireEvent, render, screen } from "@testing-library/react";
+import { fireEvent, screen } from "@testing-library/react";
 import React from "react";
-import { ShareForm } from "../ShareForm";
+import ShareForm from "..";
+import { render } from '../../../utils/testing'
 import '@testing-library/jest-dom'
 
 describe('ShareForm', () => {

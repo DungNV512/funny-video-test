@@ -1,5 +1,5 @@
 import React, { useCallback, useState } from "react";
-import { validateRequired } from "../../../../helper";
+import { validateRequired } from "../../helper";
 
 const ShareForm = ({ onShare, isLoading }) => {
   const [url, setUrl] = useState({

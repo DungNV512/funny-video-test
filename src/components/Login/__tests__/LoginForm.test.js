@@ -1,7 +1,16 @@
+/* eslint-disable testing-library/no-wait-for-multiple-assertions */
 import React from 'react';
-import { fireEvent, render, screen } from '@testing-library/react';
-import { LoginForm } from '../LoginForm';
-import '@testing-library/jest-dom'
+import { fireEvent, screen } from '@testing-library/react';
+import '@testing-library/jest-dom';
+import LoginForm from '../LoginForm';
+import { render } from '../../../utils/testing';
+import authServices from '../../../services/auth';
+
+jest.mock('../../../services/auth');
+
+afterEach(() => {
+  jest.resetAllMocks();
+});
 
 describe('LoginForm', () => {
   test('initial state', () => {
@@ -20,8 +29,9 @@ describe('LoginForm', () => {
   });
 
   it('calls onSubmit with form data on submit button click', () => {
-    const onSubmitSpy = jest.fn();
-    render(<LoginForm onSubmit={onSubmitSpy} />);
+    authServices.login.mockResolvedValueOnce({ data: [] });
+
+    render(<LoginForm />);
 
     const emailField = screen.getByPlaceholderText('Email');
     const passwordField = screen.getByPlaceholderText('Password');
@@ -32,29 +42,17 @@ describe('LoginForm', () => {
     fireEvent.change(passwordField, { target: { value: 'password' } });
     fireEvent.click(button);
 
-    expect(onSubmitSpy).toHaveBeenCalledWith({
-      email: 'test@email.com',
-      password: 'password',
-    });
-  });
-
-  it('updates button on loading state', () => {
-    render(<LoginForm isLoading />);
-
-    const button = screen.getByRole('button');
-
-    expect(button).toBeDisabled();
-    expect(button).toHaveTextContent('Loading...');
+    expect(authServices.login).toBeCalledTimes(1);
   });
 
   it('displays validate error', () => {
-    render(<LoginForm />)
+    render(<LoginForm />);
 
     const button = screen.getByRole('button');
 
-    fireEvent.click(button)
+    fireEvent.click(button);
 
-    const errorText = screen.getAllByText('This field is required')
-    expect(errorText.length).toBeGreaterThan(0)
-  })
+    const errorText = screen.getAllByText('This field is required');
+    expect(errorText.length).toBeGreaterThan(0);
+  });
 });

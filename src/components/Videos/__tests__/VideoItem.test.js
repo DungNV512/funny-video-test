@@ -1,12 +1,12 @@
 import { fireEvent, render, screen } from '@testing-library/react';
 import React from 'react';
-import { MovieItem } from '../MovieItem';
+import VideoItem from '../VideoItem';
 import '@testing-library/jest-dom'
-import { MOCK_SHARED_MOVIES } from '../../../../constants';
+import MOCK_SHARED_VIDEOS from '../../../mockAPI/videos.json';
 
-describe('MovieItem', () => {
+describe('VideoItem', () => {
   it('renders default state', () => {
-    render(<MovieItem info={MOCK_SHARED_MOVIES[0]}/>);
+    render(<VideoItem video={MOCK_SHARED_VIDEOS.data[0]}/>);
 
     const titleEl = screen.getByRole('heading');
     expect(titleEl).toBeInTheDocument();
@@ -17,7 +17,7 @@ describe('MovieItem', () => {
   });
 
   it('renders signed state', () => {
-    render(<MovieItem canVote info={MOCK_SHARED_MOVIES[0]}/>);
+    render(<VideoItem canVote video={MOCK_SHARED_VIDEOS.data[0]}/>);
 
     const voteButton = screen.getAllByRole('button');
     expect(voteButton.length).toBeGreaterThan(0);
@@ -25,7 +25,7 @@ describe('MovieItem', () => {
 
   it('call onVote when vote button click', () => {
     const onVoteSpy = jest.fn();
-    render(<MovieItem canVote onVote={onVoteSpy} info={MOCK_SHARED_MOVIES[0]}/>);
+    render(<VideoItem canVote onVote={onVoteSpy} video={MOCK_SHARED_VIDEOS.data[0]}/>);
 
     const voteButton = screen.getAllByRole('button');
     fireEvent.click(voteButton[0]);

@@ -1,6 +1,6 @@
 import React from "react";
 import Login from "../Login";
-import { ReactComponent as IconHome } from "../../assets/home-svgrepo-com.svg";
+import IconHome from "../../assets/home-svgrepo-com.svg";
 
 const Header = () => {
   return (
@@ -14,7 +14,7 @@ const Header = () => {
         borderBottom: "1px double",
       }}
     >
-      <IconHome style={{ height: "48px", margin: "0 2em" }} />
+      <img src={IconHome} alt="logo" height={48} width={48} style={{margin: "0 2em"}}/>
       <Login />
     </div>
   );

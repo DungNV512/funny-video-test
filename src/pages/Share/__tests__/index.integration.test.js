@@ -1,11 +1,12 @@
 /* eslint-disable testing-library/no-wait-for-multiple-assertions */
-import { fireEvent, render, screen, waitFor } from '@testing-library/react';
 import React from 'react';
-import { ShareModule } from '..';
-import { shareMovie } from '../../api';
+import { fireEvent, screen, waitFor } from '@testing-library/react';
+import ShareModule from '../index';
+import videoServices from '../../../services/videos';
+import { render } from '../../../utils/testing'
 import '@testing-library/jest-dom'
 
-jest.mock('../../api');
+jest.mock('../../../services/videos');
 
 afterEach(() => {
   jest.resetAllMocks();
@@ -24,7 +25,7 @@ describe('ShareModule', () => {
   });
 
   test('share successfully', async () => {
-    shareMovie.mockResolvedValueOnce({ isSucess: true });
+    videoServices.shareVideo.mockResolvedValueOnce({ isSucess: true });
 
     render(<ShareModule />);
 
@@ -35,20 +36,17 @@ describe('ShareModule', () => {
     fireEvent.change(urlField, { target: { value: 'https://youtube.com' } });
     fireEvent.click(buttonShare);
 
-    // it sets loading state
-    expect(buttonShare).toBeDisabled();
-    expect(buttonShare).toHaveTextContent('Loading...');
-
     await waitFor(() => {
-      // it hides form elements
-      expect(buttonShare).not.toBeInTheDocument();
-      expect(urlField).not.toBeInTheDocument();
+      expect(videoServices.shareVideo).toBeCalledTimes(1)
+
+      const successfulText = screen.getByText('Share successfully')
+      expect(successfulText).toBeInTheDocument()
     });
   });
 
   test('share error', async () => {
     const message = 'Share error';
-    shareMovie.mockRejectedValueOnce({ message });
+    videoServices.shareVideo.mockRejectedValueOnce({ message });
 
     render(<ShareModule />);
 
@@ -58,10 +56,6 @@ describe('ShareModule', () => {
     // fill out and submit form
     fireEvent.change(urlField, { target: { value: 'https://youtube.com' } });
     fireEvent.click(buttonShare);
-
-    // it sets loading state
-    expect(buttonShare).toBeDisabled();
-    expect(buttonShare).toHaveTextContent('Loading...');
 
     await waitFor(() => {
       // it resets button
