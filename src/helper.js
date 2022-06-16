@@ -18,8 +18,13 @@ export function parseJwt(token) {
 }
 
 export function validateRequired(value) {
-    if(!value) {
-      return 'This field is required'
-    }
-    return ''
+  if (!value) {
+    return "This field is required";
   }
+  return "";
+}
+
+export const getTokenFromLocal = () => {
+  const currentUser = JSON.parse(localStorage.getItem("user"));
+  return currentUser;
+};

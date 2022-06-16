@@ -1,6 +1,4 @@
-import React, { useCallback, useEffect, useMemo, useState } from "react";
-import { useDispatch } from "react-redux";
-
+import React from "react";
 import Videos from "../../components/Videos";
 
 const Home = () => {

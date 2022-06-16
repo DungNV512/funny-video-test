@@ -1,25 +1,40 @@
-import React, { useState, useEffect, useCallback } from "react";
+import React, { useEffect } from "react";
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
+import { silentLogin } from "./actions";
+import { PrivateRoute } from "./components/PrivateRoute";
 import Header from "./components/Header";
 import Home from "./pages/Home";
 import Share from "./pages/Share";
-import logo from "./logo.svg";
 import history from "./history";
 import "./App.css";
 
-function App() {
+const App = () => {
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(silentLogin());
+  }, []);
+
   return (
-    <div className="App">
-      <Header />
+    <div
+      className="App"
+      style={{
+        margin: "0 auto",
+        maxWidth: "1080px",
+        borderBottom: "1px double",
+        marginBottom: "20px",
+        padding: "10px 0",
+      }}
+    >
       <Router history={history}>
+        <Header />
         <Switch>
           <Route exact path="/" component={Home} />
-          <Route exact path="/share" component={Share} />
+          <PrivateRoute exact path="/share" component={Share} />
         </Switch>
       </Router>
     </div>
   );
-}
+};
 
 export default App;

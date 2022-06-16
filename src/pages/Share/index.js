@@ -6,7 +6,7 @@ const Share = () => {
   const [error, setError] = useState("");
   const [isSucess, setIsSuccess] = useState(false);
 
-  const handleShare = useCallback(async ({ url }) => {
+  const handleShare = useCallback(async () => {
     setIsLoading(true);
     try {
       // const res = await shareMovie(url);
@@ -18,30 +18,13 @@ const Share = () => {
       setIsLoading(false);
     }
   }, []);
-  const isError = error !== "";
-  const renderHeader = () => {
-    return (
-      <div>
-        <span>
-          Welcome <b>test@email.com</b>
-        </span>
-        <button>Share a movie</button>
-        <button>Logout</button>
-      </div>
-    );
-  };
+
   if (isSucess) {
     return <p>Share successfully</p>;
   }
   return (
     <>
-      {renderHeader()}
       <ShareForm isLoading={isLoading} onShare={handleShare} />
-      {isError && (
-        <span>
-          <b>Error: </b> {error}
-        </span>
-      )}
     </>
   );
 };

@@ -1,19 +1,29 @@
 import axios from "axios";
+import { API_URL } from "../constants";
+import { checkAuth } from "../actions";
 
-const API_URL = "http://localhost:8080/api/auth/";
-
-const login = (username, password) => {
+const login = (email, password) => {
   return axios
-    .post(API_URL + "signin", {
-      username,
+    .post(API_URL + "user", {
+      email,
       password,
     })
+    .then((user) => checkAuth({ email, password }, user)) // mimic checkAuth function, should be execute on back-end side
     .then((response) => {
-      if (response.data.accessToken) {
-        localStorage.setItem("user", JSON.stringify(response.data));
+      const { isAuth, user, message } = response;
+      if (isAuth) {
+        localStorage.setItem("user", JSON.stringify(user));
+        return Promise.resolve({
+          user,
+          isAuth,
+          message,
+        });
+      } else {
+        return Promise.reject({
+          isAuth,
+          message,
+        });
       }
-
-      return response.data;
     });
 };
 

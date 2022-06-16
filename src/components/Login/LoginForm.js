@@ -1,11 +1,10 @@
 import React, { useCallback, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { validateRequired } from "../../helper";
 import { login } from "../../actions";
 
-const LoginForm = ({}) => {
+const LoginForm = () => {
   const dispatch = useDispatch()
-  const [isLoading, setIsLoading] = useState(false);
   const [form, setForm] = useState({
     email: "",
     password: "",
@@ -14,6 +13,7 @@ const LoginForm = ({}) => {
     email: "",
     password: "",
   });
+
   const validation = useCallback(() => {
     const error = {
       email: validateRequired(form.email),
@@ -49,8 +49,8 @@ const LoginForm = ({}) => {
       if (isValid) {
         dispatch(
           login({
-            email: e.target.value.email.trim(),
-            password: e.target.value.password.trim(),
+            email: e.target.email.value.trim(),
+            password: e.target.password.value.trim(),
           })
         );
       }
@@ -91,7 +91,7 @@ const LoginForm = ({}) => {
         />
         {error.password && <span>{error.password}</span>}
       </div>
-      <button type="submit" disabled={isLoading}>
+      <button type="submit">
         {"Login/Register"}
       </button>
     </form>

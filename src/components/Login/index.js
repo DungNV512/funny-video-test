@@ -1,21 +1,12 @@
 import React from "react";
+import { useSelector } from "react-redux";
+import { selectIsAuth } from "../../selector/auth/selectAuth";
 import LoginForm from "./LoginForm";
 import Profile from "./Profile";
 
-const Login = ({ state = {} }) => {
-  const email = state && state.user && state.user.email;
-  const isLoading = state.status === "pending";
-  const isError = state.status === "rejected";
-
-  if (email) {
-    return <Profile />;
-  }
-
-  return (
-    <>
-      <LoginForm isLoading={isLoading} />
-    </>
-  );
+const Login = () => {
+  const isAuth = useSelector(selectIsAuth);
+  return <> {isAuth ? <Profile /> : <LoginForm />}</>;
 };
 
 export default Login;
