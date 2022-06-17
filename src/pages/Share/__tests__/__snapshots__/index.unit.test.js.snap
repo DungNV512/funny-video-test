@@ -2,25 +2,34 @@
 
 exports[`ShareModule matches snapshot 1`] = `
 <div>
-  <form
-    autocomplete="off"
-    novalidate=""
+  <div
+    class="form-share"
   >
-    <label
-      for="url"
+    <form
+      autocomplete="off"
+      novalidate=""
     >
-      Youtube URL:
-      <input
-        id="url"
-        name="url"
-        value=""
-      />
-    </label>
-    <button
-      type="submit"
-    >
-      Share
-    </button>
-  </form>
+      <label
+        class="label"
+        for="url"
+      >
+        Youtube URL
+        <input
+          class="input"
+          id="url"
+          name="url"
+          placeholder="Enter URL"
+          type="url"
+          value=""
+        />
+      </label>
+      <button
+        class="btn btn-share"
+        type="submit"
+      >
+        Share
+      </button>
+    </form>
+  </div>
 </div>
 `;

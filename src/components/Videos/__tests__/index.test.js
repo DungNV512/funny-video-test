@@ -18,7 +18,7 @@ describe('Videos', () => {
   it('renders empty list', () => {
     render(<Videos />);
 
-    const emptyText = screen.getByText('Empty.');
+    const emptyText = screen.getByText('Empty');
     expect(emptyText).toBeInTheDocument();
   });
 

@@ -4,10 +4,11 @@ exports[`HomeModule matches snapshot 1`] = `
 <div>
   <div
     class="home-page"
-    style="margin: 0px auto; max-width: 720px;"
   >
-    <p>
-      Empty.
+    <p
+      class="label text-center"
+    >
+      Empty
     </p>
   </div>
 </div>

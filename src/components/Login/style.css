@@ -1,9 +1,60 @@
-.profile {
-    display: "flex";
-    justify-content: "flex-end";
-    align-items: "center";
+.form {
+  display: flex;
+  justify-content: flex-end;
+  align-items: flex-start;
 }
 
-.profile>* {
-    margin-left: 10px;
+.form > * {
+  margin-left: 10px;
+}
+
+.input-wrapper {
+  display: flex;
+  flex-direction: column;
+}
+
+.input {
+  padding: 0 8px;
+  border: 1px solid #dedfe2;
+  outline: none;
+  height: 35px;
+  border-radius: 5px;
+}
+
+.input-error {
+  border-color: #e94040;
+}
+
+.error {
+  font-size: 14px;
+  color: #e94040;
+  margin-top: 4px;
+}
+
+.btn {
+  height: 37px;
+  outline: none;
+  cursor: pointer;
+  border: 1px solid transparent;
+  background-color: #30a960;
+  color: #fff;
+  font-weight: 600;
+  border-radius: 5px;
+}
+
+.btn:hover {
+  background-color: #56ca76;
+}
+
+.btn-logout {
+  margin-left: 8px;
+  background-color: #737682;
+}
+
+.btn-logout:hover {
+  background-color: #c8cacf;
+}
+
+.profile span {
+  margin-right: 8px;
 }

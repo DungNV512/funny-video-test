@@ -24,7 +24,7 @@ describe('HomeModule', () => {
     render(<HomeModule />);
 
     // it renders empty video list
-    const emptyText = screen.getByText('Empty.')
+    const emptyText = screen.getByText('Empty')
     expect(emptyText).toBeInTheDocument()
   });
 
@@ -34,7 +34,7 @@ describe('HomeModule', () => {
     render(<HomeModule />);
     expect(videoServices.getPublicContent).toHaveBeenCalledTimes(1);
 
-    const emptyText = await waitFor(() => screen.findByText('Empty.'));
+    const emptyText = await waitFor(() => screen.findByText('Empty'));
     expect(emptyText).toBeInTheDocument();
   });
 

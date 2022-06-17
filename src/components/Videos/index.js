@@ -4,6 +4,8 @@ import { selectVideos } from '../../selector/videos/selectVideos';
 import { getListVideos } from '../../actions';
 import VideoItem from './VideoItem';
 
+import './style.css'
+
 const Videos = () => {
   const [isLoading, setIsLoading]= useState(true)
   const videos = useSelector(selectVideos);
@@ -21,10 +23,10 @@ const Videos = () => {
   const isEmpty = videos.length === 0;
 
   if (isLoading) {
-    return <p>Loading...</p>;
+    return <p className='label text-center'>Loading...</p>;
   }
 
-  if (isEmpty) return <p>Empty.</p>;
+  if (isEmpty) return <p className='label text-center'>Empty</p>;
 
   return (
     <>

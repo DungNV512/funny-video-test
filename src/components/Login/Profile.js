@@ -1,9 +1,8 @@
-import React from "react";
-import { useSelector, useDispatch } from "react-redux";
-import { useHistory } from "react-router-dom";
-import { selectUser } from "../../selector/auth/selectAuth";
-import { logout } from "../../actions";
-import "./style.css";
+import React from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+import { useHistory } from 'react-router-dom';
+import { selectUser } from '../../selector/auth/selectAuth';
+import { logout } from '../../actions';
 
 const Profile = () => {
   const history = useHistory();
@@ -11,29 +10,21 @@ const Profile = () => {
   const user = useSelector(selectUser);
 
   const onShare = () => {
-    history.push("/share");
+    history.push('/share');
   };
 
   const onLogout = () => {
     dispatch(logout());
-    history.push("/");
+    history.push('/');
   };
 
   return (
-    <div
-      className="profile"
-      style={{
-        display: "flex",
-        justifyContent: "flex-end",
-        alignItems: "center",
-        width: "460px",
-      }}
-    >
+    <div className="profile">
       <span>
         Welcome <b>{user.email}</b>
       </span>
-      <button onClick={onShare}>Share a movie</button>
-      <button onClick={onLogout}>Logout</button>
+      <button onClick={onShare} className="btn">Share a movie</button>
+      <button onClick={onLogout} className="btn btn-logout">Logout</button>
     </div>
   );
 };

@@ -16,7 +16,7 @@ describe('ShareModule', () => {
   test('initial state', () => {
     render(<ShareModule />);
     // it renders empty url field
-    const urlField = screen.getByRole('textbox', {name: 'Youtube URL:'})
+    const urlField = screen.getByRole('textbox', {name: 'Youtube URL'})
     expect(urlField).toHaveValue('');
 
     // it renders enabled share button
@@ -29,7 +29,7 @@ describe('ShareModule', () => {
 
     render(<ShareModule />);
 
-    const urlField = screen.getByRole('textbox', {name: 'Youtube URL:'})
+    const urlField = screen.getByRole('textbox', {name: 'Youtube URL'})
     const buttonShare = screen.getByRole('button', { name: 'Share' });
 
     // fill out and submit form
@@ -38,9 +38,6 @@ describe('ShareModule', () => {
 
     await waitFor(() => {
       expect(videoServices.shareVideo).toBeCalledTimes(1)
-
-      const successfulText = screen.getByText('Share successfully')
-      expect(successfulText).toBeInTheDocument()
     });
   });
 
@@ -50,7 +47,7 @@ describe('ShareModule', () => {
 
     render(<ShareModule />);
 
-    const urlField = screen.getByRole('textbox', {name: 'Youtube URL:'})
+    const urlField = screen.getByRole('textbox', {name: 'Youtube URL'})
     const buttonShare = screen.getByRole('button', { name: 'Share' });
 
     // fill out and submit form

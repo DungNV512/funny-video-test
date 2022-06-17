@@ -1,6 +1,8 @@
 import React, { useCallback, useState } from "react";
 import { validateRequired } from "../../helper";
 
+import './style.css'
+
 const ShareForm = ({ onShare, isSucess }) => {
   const [url, setUrl] = useState({
     value: "",
@@ -31,34 +33,23 @@ const ShareForm = ({ onShare, isSucess }) => {
   );
 
   return (
-    <div
-      style={{
-        display: "flex",
-        justifyContent: "center",
-        alignItems: "center",
-        padding: "10px",
-        width: "360px",
-        minHeight: "150px",
-        position: "absolute",
-        left: "50%",
-        top: "40%",
-        transform: "translate(-50%, -50%)",
-        border: "2px solid #1c9f7f",
-      }}
-    >
-      <div className="App-form">
-        <form noValidate autoComplete="off" onSubmit={handleSubmit}>
+    <div className="form-share">
+      <form noValidate autoComplete="off" onSubmit={handleSubmit}>
+        <label htmlFor="url" className="label">
+          Youtube URL
           <input
-            type="url"
             name="url"
             id="url"
-            placeholder="Youtube URL"
             value={url.value}
             onChange={handleChangeUrl}
+            type="url"
+            placeholder="Enter URL"
+            className={`input${url.error ? ' input-error' : ''}`}
           />
-          <input type="submit" value="Share"/>
-        </form>
-      </div>
+          {url.error && <span>{url.error}</span>}
+        </label>
+        <button type="submit" className="btn btn-share">Share</button>
+      </form>
     </div>
   );
 };

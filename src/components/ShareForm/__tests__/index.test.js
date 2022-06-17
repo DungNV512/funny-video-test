@@ -9,7 +9,7 @@ describe('ShareForm', () => {
     render(<ShareForm />)
 
     // it renders empty url field
-    const urlField = screen.getByRole('textbox', {name: 'Youtube URL:'})
+    const urlField = screen.getByRole('textbox', {name: 'Youtube URL'})
     expect(urlField).toHaveValue('')
 
     // it renders enabled share button
@@ -22,7 +22,7 @@ describe('ShareForm', () => {
 
     render(<ShareForm onShare={onShareSpy}/>)
 
-    const urlField = screen.getByRole('textbox', {name: 'Youtube URL:'})
+    const urlField = screen.getByRole('textbox', {name: 'Youtube URL'})
     const buttonShare = screen.getByRole('button', { name: /Share/i})
 
     // fill out and submit form
@@ -32,15 +32,6 @@ describe('ShareForm', () => {
     expect(onShareSpy).toHaveBeenCalledWith({
       url: 'https://youtube.com'
     })
-  })
-
-  it('updates button on loading state', () => {
-    render(<ShareForm isLoading/>)
-
-    const button = screen.getByRole('button')
-
-    expect(button).toBeDisabled()
-    expect(button).toHaveTextContent('Loading...')
   })
 
   it('renders error if urlField empty', () => {

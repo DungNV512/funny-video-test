@@ -1,9 +1,8 @@
-import React, { useCallback, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { selectIsAuth } from "../../selector/auth/selectAuth";
-import { validateRequired } from "../../helper";
-import { login } from "../../actions";
-import "./style.css";
+import React, { useCallback, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { selectIsAuth } from '../../selector/auth/selectAuth';
+import { validateRequired } from '../../helper';
+import { login } from '../../actions';
 
 const LoginForm = () => {
   const dispatch = useDispatch();
@@ -11,19 +10,19 @@ const LoginForm = () => {
   const isAuth = useSelector(selectIsAuth);
   const [isLoading, setIsLoading] = useState(false);
   const [form, setForm] = useState({
-    email: "",
-    password: "",
+    email: '',
+    password: '',
   });
   const [error, setError] = useState({
-    email: "",
-    password: "",
+    email: '',
+    password: '',
   });
   const validation = useCallback(() => {
     const error = {
       email: validateRequired(form.email),
       password: validateRequired(form.password),
     };
-    const isValid = Object.values(error).every((e) => e === "");
+    const isValid = Object.values(error).every((e) => e === '');
     setError(error);
     return isValid;
   }, [form]);
@@ -75,17 +74,12 @@ const LoginForm = () => {
 
   return (
     <form
-      className="profile"
+      className="form"
       noValidate
       autoComplete="off"
       onSubmit={handleSubmit}
-      style={{
-        display: "flex",
-        justifyContent: "space-around",
-        alignItems: "center",
-      }}
     >
-      <div>
+      <div className='input-wrapper'>
         <input
           id="email"
           name="email"
@@ -93,10 +87,11 @@ const LoginForm = () => {
           value={form.email}
           type="text"
           placeholder="Email"
+          className={`input${error.email ? ' input-error' : ''}`}
         />
-        {error.email && <span>{error.email}</span>}
+        {error.email && <span className="error">{error.email}</span>}
       </div>
-      <div>
+      <div className='input-wrapper'>
         <input
           id="password"
           name="password"
@@ -104,10 +99,11 @@ const LoginForm = () => {
           value={form.password}
           type="password"
           placeholder="Password"
+          className={`input${error.password ? ' input-error' : ''}`}
         />
-        {error.password && <span>{error.password}</span>}
+        {error.password && <span className="error">{error.password}</span>}
       </div>
-      <button type="submit" disabled={isLoading}>
+      <button type="submit" disabled={isLoading} className="btn">
         Login/Register
       </button>
     </form>

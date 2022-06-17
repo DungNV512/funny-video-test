@@ -9,6 +9,10 @@ import Share from "./pages/Share";
 import history from "./history";
 import "./App.css";
 
+const NotFound = () => (
+  <div className="page-note-found"><h3>Page Not Found</h3></div>
+)
+
 const App = () => {
   const dispatch = useDispatch();
   useEffect(() => {
@@ -16,20 +20,13 @@ const App = () => {
   }, [dispatch]);
 
   return (
-    <div
-      className="App"
-      style={{
-        margin: "0 auto",
-        maxWidth: "1080px",
-        marginBottom: "20px",
-        padding: "10px 0",
-      }}
-    >
+    <div className="App">
       <Router history={history}>
         <Header />
         <Switch>
           <Route exact path="/" component={Home} />
           <PrivateRoute exact path="/share" component={Share} />
+          <Route component={NotFound} />
         </Switch>
       </Router>
     </div>
