@@ -2,11 +2,12 @@ import React, { useCallback, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { selectIsAuth } from "../../selector/auth/selectAuth";
 import { validateRequired } from "../../helper";
-import { login, register } from "../../actions";
+import { login } from "../../actions";
 import "./style.css";
 
 const LoginForm = () => {
   const dispatch = useDispatch();
+  // eslint-disable-next-line no-unused-vars
   const isAuth = useSelector(selectIsAuth);
   const [isLoading, setIsLoading] = useState(false);
   const [form, setForm] = useState({

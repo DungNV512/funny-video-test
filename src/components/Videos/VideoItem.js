@@ -9,9 +9,9 @@ import "./style.css";
 
 const VideoItem = ({ video, onVote }) => {
   const isAuth = useSelector(selectIsAuth);
-  const handleVote = (videoId, type) => {
-    onVote(videoId, type);
-  };
+  // const handleVote = (videoId, type) => {
+  //   onVote(videoId, type);
+  // };
   return (
     <div
       style={{

@@ -19,7 +19,7 @@ const Share = () => {
     } finally {
       setIsLoading(false);
     }
-  }, []);
+  }, [history]);
   const isError = error !== "";
 
   return (

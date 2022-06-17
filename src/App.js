@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { silentLogin } from "./actions";
 import { PrivateRoute } from "./components/PrivateRoute";
 import Header from "./components/Header";
@@ -8,13 +8,12 @@ import Home from "./pages/Home";
 import Share from "./pages/Share";
 import history from "./history";
 import "./App.css";
-import "./styles.scss";
 
 const App = () => {
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(silentLogin());
-  }, []);
+  }, [dispatch]);
 
   return (
     <div

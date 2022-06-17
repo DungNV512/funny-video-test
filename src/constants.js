@@ -1,2 +1,1 @@
-export const ENDPOINT_URL = "http://localhost:3000/"
-
+export const ENDPOINT_URL = process.env.ENDPOINT_URL || "http://localhost:3000/"
