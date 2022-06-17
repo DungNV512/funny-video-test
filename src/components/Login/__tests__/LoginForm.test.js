@@ -45,7 +45,7 @@ describe('LoginForm', () => {
     expect(authServices.login).toBeCalledTimes(1);
   });
 
-  it('displays validate error', () => {
+  it('displays validate require error', () => {
     render(<LoginForm />);
 
     const button = screen.getByRole('button');
@@ -54,5 +54,16 @@ describe('LoginForm', () => {
 
     const errorText = screen.getAllByText('This field is required');
     expect(errorText.length).toBeGreaterThan(0);
+  });
+
+  it('displays validate email error', () => {
+    render(<LoginForm />);
+
+    const emailField = screen.getByPlaceholderText('Email');
+
+    fireEvent.change(emailField, { target: { value: 'test' } });
+
+    const errorText = screen.getByText('Email is invalid');
+    expect(errorText).toBeInTheDocument()
   });
 });

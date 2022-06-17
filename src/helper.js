@@ -24,6 +24,17 @@ export function validateRequired(value) {
   return "";
 }
 
+export function validateEmail(str) {
+  if (!str) {
+    return "This field is required";
+  }
+  const isValid = str.toLowerCase()
+  .match(
+    /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
+  );
+  return isValid ? "" : "Email is invalid"
+}
+
 export const getTokenFromLocal = () => {
   const currentUser = JSON.parse(localStorage.getItem("user"));
   return currentUser;

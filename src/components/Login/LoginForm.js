@@ -1,7 +1,7 @@
 import React, { useCallback, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { selectIsAuth } from '../../selector/auth/selectAuth';
-import { validateRequired } from '../../helper';
+import { validateEmail, validateRequired } from '../../helper';
 import { login } from '../../actions';
 
 const LoginForm = () => {
@@ -19,7 +19,7 @@ const LoginForm = () => {
   });
   const validation = useCallback(() => {
     const error = {
-      email: validateRequired(form.email),
+      email: validateEmail(form.email),
       password: validateRequired(form.password),
     };
     const isValid = Object.values(error).every((e) => e === '');
@@ -37,10 +37,17 @@ const LoginForm = () => {
         [target.name]: value,
       });
 
-      setError({
-        ...error,
-        [target.name]: validateRequired(value),
-      });
+      if (target.name === 'email') {
+        setError({
+          ...error,
+          email: validateEmail(value)
+        })
+      } else {
+        setError({
+          ...error,
+          [target.name]: validateRequired(value),
+        });
+      }
     },
     [form, error]
   );

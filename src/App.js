@@ -25,7 +25,8 @@ const App = () => {
         <Header />
         <Switch>
           <Route exact path="/" component={Home} />
-          <PrivateRoute exact path="/share" component={Share} />
+          <Route exact path="/share" component={Share} />
+          {/* <PrivateRoute exact path="/share" component={Share} /> */}
           <Route component={NotFound} />
         </Switch>
       </Router>

@@ -25,3 +25,7 @@
   display: flex;
   flex-direction: column;
 }
+
+.form-share input {
+  margin-top: 16px;
+}
