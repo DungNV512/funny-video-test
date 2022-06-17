@@ -30,7 +30,7 @@ const Videos = () => {
 
   return (
     <>
-      <ul aria-labelledby="videos-heading" style={{ listStyleType: 'none' }}>
+      <ul aria-labelledby="videos-heading" className='video-list'>
         {videos.map((video) => (
           <li key={video.id}>
             <VideoItem canVote onVote={handleVote} video={video} />

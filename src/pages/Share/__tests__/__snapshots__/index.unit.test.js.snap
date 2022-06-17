@@ -13,12 +13,12 @@ exports[`ShareModule matches snapshot 1`] = `
         class="label"
         for="url"
       >
-        Youtube URL
+        Share a movie
         <input
           class="input"
           id="url"
           name="url"
-          placeholder="Enter URL"
+          placeholder="Enter Youtube URL"
           type="url"
           value=""
         />

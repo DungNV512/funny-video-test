@@ -10,7 +10,7 @@ import history from "./history";
 import "./App.css";
 
 const NotFound = () => (
-  <div className="page-note-found"><h3>Page Not Found</h3></div>
+  <div className="page-not-found"><h3>Page Not Found</h3></div>
 )
 
 const App = () => {

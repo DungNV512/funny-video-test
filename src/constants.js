@@ -1,5 +1,5 @@
 const API_URL = {
-  development: 'http://localhost:3000/',
+  development: 'https://funny-movies-test-server.herokuapp.com/',
   production: 'https://funny-movies-test-server.herokuapp.com/'
 }
 

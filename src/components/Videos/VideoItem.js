@@ -14,12 +14,11 @@ const VideoItem = ({ video, onVote }) => {
   // };
   return (
     <div className="video-item">
-      <div style={{ marginRight: '30px' }}>
+      <div className='video-player'>
         <ReactPlayer
-          width="320px"
           height="240px"
           url={video.url}
-          style={{ width: '320px' }}
+          className
         />
       </div>
       <div className="movie-item">

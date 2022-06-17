@@ -53,3 +53,39 @@
   right: 0px;
   top: -5px;
 }
+
+.video-player {
+  margin-right: 30px;
+  width: 320px;
+}
+
+.video-player > div {
+  width: 320px !important;
+}
+
+.video-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+@media screen and (max-width: 768px) {
+  .video-item {
+    display: block;
+    padding: 16px;
+    margin-bottom: 0;
+  }
+
+  .title {
+    margin-top: 16px;
+  }
+
+  .video-player {
+    margin: 0;
+    width: 100%;
+  }
+
+  .video-player > div {
+    width: 100% !important;
+  }
+}

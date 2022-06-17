@@ -36,14 +36,14 @@ const ShareForm = ({ onShare, isSucess }) => {
     <div className="form-share">
       <form noValidate autoComplete="off" onSubmit={handleSubmit}>
         <label htmlFor="url" className="label">
-          Youtube URL
+          Share a movie
           <input
             name="url"
             id="url"
             value={url.value}
             onChange={handleChangeUrl}
             type="url"
-            placeholder="Enter URL"
+            placeholder="Enter Youtube URL"
             className={`input${url.error ? ' input-error' : ''}`}
           />
           {url.error && <span>{url.error}</span>}

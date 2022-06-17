@@ -9,7 +9,7 @@ describe('ShareForm', () => {
     render(<ShareForm />)
 
     // it renders empty url field
-    const urlField = screen.getByRole('textbox', {name: 'Youtube URL'})
+    const urlField = screen.getByRole('textbox', {name: 'Share a movie'})
     expect(urlField).toHaveValue('')
 
     // it renders enabled share button
@@ -22,7 +22,7 @@ describe('ShareForm', () => {
 
     render(<ShareForm onShare={onShareSpy}/>)
 
-    const urlField = screen.getByRole('textbox', {name: 'Youtube URL'})
+    const urlField = screen.getByRole('textbox', {name: 'Share a movie'})
     const buttonShare = screen.getByRole('button', { name: /Share/i})
 
     // fill out and submit form
