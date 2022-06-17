@@ -9,6 +9,10 @@ server.use(router)
 
 const port = process.env.PORT || 3000
 
+server.get('/api', (req, res) => {
+    res.status(200).json({api: 'version 1'})
+  })
+
 server.listen(port, () => {
     console.log(`JSON Server is running on port ${port}`)
 })
